@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>	
+	<title>compass.html</title>
+</head>
+<body>
+	<p id="test"></p>
+	<img src="images/compass.png"/>
+	<script src="js/jquery-3.3.1.js"></script>	
+	<script>
+
+		window.ondeviceorientation=function(event){
+			var heading;
+
+			if(event.webkitCompassHeading){
+				// 아이폰
+				heading=event.webkitCompassHeading;
+			} else {
+				// 안드로이드
+				heading=event.alpha-85;
+				// if(!window.chrome){
+				// 	// 크롬 브라우저가 아닌 경우
+				// 	heading=event.alpha-270;
+				// }
+			}
+			$("#test").text("heading: " + heading);
+		};
+	</script>
+</body>
+</html>

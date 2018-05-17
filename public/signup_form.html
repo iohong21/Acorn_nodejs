@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>signup_form.html</title>
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+	</head>
+	<body>
+		<h1>회원가입 폼입니다.</h1>
+		<!-- action 속성은 요청 경로를 설정하는 것이고 -->
+		<!-- method 속성은 요청 방식을 설정하는 것이다 -->
+		<form action="/signup" method="post">
+			<div class="form-group">
+				<label for="email">이메일</label>
+				<input type="text" id="email" name="email" class="form-control" >
+				<label for="pwd">비밀번호</label>
+				<input type="password" id="pwd" name="pwd" class="form-control" >
+				<button type="submit" class="btn btn-primary">가입</button>
+				<button tyep="reset" class="btn btn-warning">취소</button>
+			</div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>orientation.html</title>
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+	</head>
+	<body>
+	<div class="container">
+		<h1>방향 센서 테스트</h1>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3>헤딩</h3>
+					</div>
+					<div class="panel-body">
+						<p id="heading"></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3>피치</h3>
+					</div>
+					<div class="panel-body">
+						<p id="pitch"></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3>롤링</h3>
+					</div>
+					<div class="panel-body">
+						<p id="rolling"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		// //기기의 방향이 바뀌었을때 호출되는 함수 등록 
+		// window.ondeviceorientation=function(event){
+		// 	//헤딩
+		// 	var heading=event.alpha;
+		// 	// var heading=event.webkitCompassHeading;
+		// 	//피치
+		// 	var pitch=parseInt(event.beta);
+		// 	//롤링
+		// 	var rolling=parseInt(event.gamma);
+
+		// 	// $("#heading").text(heading);
+		// 	$("#pitch").text(pitch);
+		// 	$("#rolling").text(rolling);
+		// };
+	</script>
+	</body>
+</html>

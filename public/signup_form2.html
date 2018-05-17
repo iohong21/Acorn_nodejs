@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>signup_form2.html</title>
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+	</head>
+	<body>
+		<h1>회원가입 폼입니다.</h1>
+		<!-- action 속성은 요청 경로를 설정하는 것이고 -->
+		<!-- method 속성은 요청 방식을 설정하는 것이다 -->
+		<form id="myForm" action="/signup" method="post">
+			<div class="form-group">
+				<label for="email">이메일</label>
+				<input type="text" id="email" name="email" class="form-control" >
+				<label for="pwd">비밀번호</label>
+				<input type="password" id="pwd" name="pwd" class="form-control" ><br/>
+				<button type="submit" class="btn btn-primary">가입</button>
+				<button tyep="reset" class="btn btn-warning">취소</button>
+			</div>
+		</form>
+		<script src="js/jquery-3.3.1.js"></script>
+		<script>
+			// 폼 제출 버튼을 눌렀을떄 발생하는 이벤트 처리
+			$("#myForm").on("submit", function(event){
+				// 폼에 입력한 정보 읽어오기
+				var email = $("#email").val();
+				var pwd = $("#pwd").val();
+
+				// ajax 기능을 이용해서 서버에 전송하기
+				$.ajax({
+					url: "/signup",
+					method: "post",
+					data: {email:email, pwd:pwd},
+					success: function(data){
+						console.log(data);
+						var result = JSON.parse(data);
+						alert(result.method);
+					}
+				});
+
+				// 폼 제출 막기
+				// return false;
+				event.preventDefault();
+			});
+		</script>
+	</body>
+</html>

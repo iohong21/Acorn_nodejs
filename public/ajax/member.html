@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>ajax/member.html</title>
+		<link rel="stylesheet" href="/css/bootstrap.css"/>
+	</head>
+	<body>
+		<div class="container">
+			<input type="text" id="inputMsg">
+			<button id="sendBtnGet">전송(Get)</button>
+			<button id="sendBtnPost">전송(Post)</button>
+			
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>방식</th>
+						<th>이름</th>
+						<th>주소</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>		
+
+		<script src="/js/jquery-3.3.1.js"></script>
+		<script>
+			// 전송 버튼을 눌렀을때 실행할 함수 등록
+			var doAJAX = function(m){
+				// 입력한 문자열을 읽어온다.
+				var msg = $("#inputMsg").val();
+
+				// ajax 기능을 이용해서 서버에 전송
+				$.ajax({
+					url:"/ajax/member",
+					method:m,
+					data:{num:msg},
+					success: function(data){
+						var result = JSON.parse(data);
+
+						$("tbody tr").remove();
+
+						var td1 = $("<td/>").text(result.method);
+						var td2 = $("<td/>").text(result.name);
+						var td3 = $("<td/>").text(result.addr);
+
+						$("<tr/>")
+						.append(td1)
+						.append(td2)
+						.append(td3)
+						.appendTo("tbody");
+					}
+				});
+			};
+
+			$("#sendBtnGet").click(function(event){
+				doAJAX("get");
+			});
+			$("#sendBtnPost").click(function(event){
+				doAJAX("post");
+			});
+		</script>
+	</body>
+</html>

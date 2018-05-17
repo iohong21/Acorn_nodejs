@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>	
+	<title>orientation2.html</title>
+	<style>
+		.box{
+			height: 400px;
+			width: 350px;
+			border: 1px solid red;
+			background-color: yellow;
+			position: relative;
+		}
+		.box img{
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			top: 180px;
+			left: 180px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<img src="images/b0.png"/>
+	</div>
+	<p id="rp"></p>
+	<script src="js/jquery-3.3.1.js"></script>	
+	<script>
+		// var mTop = 180;
+		// var mLeft = 180;
+		// window.ondeviceorientation=function(event){
+		// 	//피치
+		// 	var pitch=parseInt(event.beta);
+		// 	//롤링
+		// 	var rolling=parseInt(event.gamma);
+
+		// 	$("#rp").text("pitch: " + pitch + "  ,  rolling: " + rolling);
+
+		// 	mTop += pitch;
+		// 	mLeft += rolling;
+
+		// 	if(mTop < 0) mTop = 0;
+		// 	if(mTop > 350) mTop = 350;
+		// 	if(mLeft < 0) mLeft = 0;
+		// 	if(mLeft > 300) mLeft = 300;
+
+		// 	$(".box img").css("top",mTop).css("left",mLeft);
+		// };
+
+		var pitch=0;
+		var rolling=0;
+
+		var imageTop=180;
+		var imageLeft=180;
+
+		window.ondeviceorientation=function(event){
+			pitch=parseInt(event.beta);
+			rolling=parseInt(event.gamma);
+		}
+
+		setInterval(function(){
+			// 피치를 top 에 반영
+			imageTop += pitch;
+			// 롤링을 left 에 반영
+			imageLeft += rolling;
+
+			if(imageTop < 0) imageTop=0;
+			if(imageTop > 350) imageTop=350;
+			if(imageLeft < 0) imageLeft=0;
+			if(imageLeft > 300) imageLeft=300;
+			// 이미지의 top과 left를 반영하는 코드
+			$("img")
+			.css("top", imageTop+"px")
+			.css("left", imageLeft+"px");
+		},100);
+	</script>
+</body>
+</html>

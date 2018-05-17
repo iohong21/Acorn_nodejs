@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax/test04.html</title>
+	<link rel="stylesheet" href="/css/bootstrap.css"/>
+</head>
+<body>
+<div class="container">
+	<h3>회원 가입 폼</h3>
+	<form action="/ajax/check_id" method="post" id="myForm">
+		<div class="form-group has-feedback">
+			<label for="id" class="control-label">아이디</label>
+			<input type="text" class="form-control" name="id" id="id">
+			<span class="success glyphicon glyphicon-ok form-control-feedback"></span>
+			<span class="fail glyphicon glyphicon-remove form-control-feedback"></span>
+		</div>
+		<div id="myPW" class="form-group has-feedback">
+			<label for="pwd" class="control-label">비밀번호</label>
+			<input type="text" class="form-control" name="pwd" id="pwd">
+			<span id="spanPW" class="glyphicon form-control-feedback"></span>
+		</div>
+		<button class="btn btn-primary" type="submit" >가입</button>
+		<button class="btn btn-danger" type="reset">취소</button>
+	</form>
+	<div id="info"></div>
+</div>
+<script src="/js/jquery-3.3.1.js"></script>
+<script>
+
+	(function(){
+		$(".success , .fail").hide();
+		//아이디 중복 확인 여부 
+		var isIdChecked=false;
+
+		//체크 버튼을 눌렀을때 실행할 함수 등록 
+		$("#id").keyup(function(event){
+			$(this).parent().removeClass("has-error has-success");
+			$(".success , .fail").hide();
+			//입력한 아이디를 읽어와서
+			var id=$("#id").val();
+			//서버에 ajax 로 보낸다음 사용 가능 여부 응답받기 
+			$.ajax({
+				url:"/ajax/check_id",
+				method:"post",
+				data:{id:id},
+				success:function(data){
+					/*
+						data 는 {"canUse":true} or {"canUse":false} 
+						형식의 JSON 문자열 이다.
+					*/
+					var result=JSON.parse(data); // object 로 변환
+					if(result.canUse){
+						$("#id").parent().addClass("has-success");
+						$(".success").show();
+
+						$("#info").text("");
+						//아이디 사용 가능 
+						isIdChecked=true;	
+					}else{
+						$("#id").parent().addClass("has-error");
+						$(".fail").show();
+
+						$("#info").html("<br/>중복된 ID 입니다.");
+						//아이디 사용 불가
+						isIdChecked=false;
+					}
+				}
+			});
+		});
+		//폼 제출 이벤트가 발생했을때 실행할 함수 등록 
+		$("#myForm").on("submit", function(){
+			if(isIdChecked==false){
+				$("#info").html("<br/>중복된 ID 입니다.");
+				return false;//폼 제출 막기 
+			}
+		});
+	})();
+	
+</script>	
+</body>
+</html>
